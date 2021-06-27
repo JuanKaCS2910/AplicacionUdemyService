@@ -31,8 +31,8 @@ namespace AplicacionUdemyService.Datos
 						while (dr.Read())
 						{
 							var _result = new ResponsePais();
-							_result.idPais = Convert.ToInt32(dr["idPais"]);
-							_result.nombre = Convert.ToString(dr["pais"]);
+							_result.idPais = Convert.ToInt32(dr["IdPais"]);
+							_result.nombre = Convert.ToString(dr["NombrePais"]);
 							lista.Add(_result);
 						}
 					}
