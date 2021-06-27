@@ -13,10 +13,12 @@ namespace AplicacionUdemyService.Controllers
     public class RegistroEmpresaController : ApiController
     {
         private PaisesDTO paisesDTO;
+        private MonedaDTO monedaDTO;
 
         public RegistroEmpresaController()
         {
             paisesDTO = new PaisesDTO();
+            monedaDTO = new MonedaDTO();
         }
 
         [HttpPost]
@@ -26,6 +28,22 @@ namespace AplicacionUdemyService.Controllers
             try
             {
                 var _result = paisesDTO.listarPaises(paramss);
+                return Ok(_result);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        [Route("listarMonedas")]
+        public IHttpActionResult listarMonedas(RegistroEmpresaEntity paramss)
+        {
+            try
+            {
+                var _result = monedaDTO.listarMonedas(paramss);
                 return Ok(_result);
             }
             catch (Exception ex)
