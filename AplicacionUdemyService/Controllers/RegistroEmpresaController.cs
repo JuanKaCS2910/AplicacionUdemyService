@@ -14,11 +14,15 @@ namespace AplicacionUdemyService.Controllers
     {
         private PaisesDTO paisesDTO;
         private MonedaDTO monedaDTO;
+        private ImpuestoDTO impuestoDTO;
+        private PorcentajeDTO porcentajeDTO;
 
         public RegistroEmpresaController()
         {
             paisesDTO = new PaisesDTO();
             monedaDTO = new MonedaDTO();
+            impuestoDTO = new ImpuestoDTO();
+            porcentajeDTO = new PorcentajeDTO();
         }
 
         [HttpPost]
@@ -44,6 +48,38 @@ namespace AplicacionUdemyService.Controllers
             try
             {
                 var _result = monedaDTO.listarMonedas(paramss);
+                return Ok(_result);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        [Route("listarImpuestos")]
+        public IHttpActionResult listarImpuesto(RegistroEmpresaEntity paramss)
+        {
+            try
+            {
+                var _result = impuestoDTO.listarImpuesto(paramss);
+                return Ok(_result);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        [Route("listarPorcentajes")]
+        public IHttpActionResult listarPorcentaje(RegistroEmpresaEntity paramss)
+        {
+            try
+            {
+                var _result = porcentajeDTO.listarPorcentaje(paramss);
                 return Ok(_result);
             }
             catch (Exception ex)

@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PorcentajeDTO.cs" />
+    <Compile Include="ImpuestoDTO.cs" />
     <Compile Include="MonedaDTO.cs" />
     <Compile Include="PaisesDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
