@@ -16,6 +16,7 @@ namespace AplicacionUdemyService.Controllers
         private MonedaDTO monedaDTO;
         private ImpuestoDTO impuestoDTO;
         private PorcentajeDTO porcentajeDTO;
+        private EmpresaDTO empresaDTO;
 
         public RegistroEmpresaController()
         {
@@ -23,6 +24,7 @@ namespace AplicacionUdemyService.Controllers
             monedaDTO = new MonedaDTO();
             impuestoDTO = new ImpuestoDTO();
             porcentajeDTO = new PorcentajeDTO();
+            empresaDTO = new EmpresaDTO();
         }
 
         [HttpPost]
@@ -80,6 +82,22 @@ namespace AplicacionUdemyService.Controllers
             try
             {
                 var _result = porcentajeDTO.listarPorcentaje(paramss);
+                return Ok(_result);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        [Route("validarRegistro")]
+        public IHttpActionResult validarRegistro(RegistroEmpresaEntity paramss)
+        {
+            try
+            {
+                var _result = empresaDTO.validarRegistro(paramss);
                 return Ok(_result);
             }
             catch (Exception ex)
