@@ -47,5 +47,48 @@ namespace AplicacionUdemyService.Datos
 
 		}
 
+		public ResponseRegistroEmpresa insertarEmpresa(RegistroEmpresaDTOEntity paramss)
+		{
+			try
+			{
+				string cs = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
+				var lista = new ResponseRegistroEmpresa();
+
+				using (SqlConnection conn = new SqlConnection(cs))
+				{
+					conn.Open();
+					SqlCommand cmd = new SqlCommand("Usp_insertarEmpresa", conn);
+					cmd.CommandType = CommandType.StoredProcedure;
+					cmd.Parameters.Add(new SqlParameter("@razonSocial", paramss.paramsEmpresa.razonSocial));
+					cmd.Parameters.Add(new SqlParameter("@ruc", paramss.paramsEmpresa.ruc));
+					cmd.Parameters.Add(new SqlParameter("@email", paramss.paramsEmpresa.email));
+					cmd.Parameters.Add(new SqlParameter("@idpais", paramss.paramsEmpresa.idPais));
+					cmd.Parameters.Add(new SqlParameter("@idmoneda", paramss.paramsEmpresa.idMoneda));
+					cmd.Parameters.Add(new SqlParameter("@direccion", paramss.paramsEmpresa.direccion));
+					cmd.Parameters.Add(new SqlParameter("@idimpuesto", paramss.paramsEmpresa.idImpuesto));
+					cmd.Parameters.Add(new SqlParameter("@idporcentaje", paramss.paramsEmpresa.idPorcentaje));
+					cmd.Parameters.Add(new SqlParameter("@vendeimpuesto", paramss.paramsEmpresa.vendeImpuesto));
+					cmd.Parameters.Add(new SqlParameter("@filename", paramss.filename));
+					cmd.Parameters.Add(new SqlParameter("@proyecto", paramss.proyecto));
+
+					using (SqlDataReader dr = cmd.ExecuteReader())
+					{
+						while (dr.Read())
+						{
+							lista.response = Convert.ToString(dr["response"]).ToString();
+						}
+					}
+				}
+				return lista;
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+
+
+		}
+
 	}
 }

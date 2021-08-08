@@ -13,5 +13,7 @@ namespace AplicacionUdemyService.Entity.Response
     public class ResponseRegistroEmpresa
     {
         public string response { get; set; }
+        public string text { get; set; }
+        public string msj { get; set; }
     }
 }
