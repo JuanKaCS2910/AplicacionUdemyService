@@ -123,5 +123,21 @@ namespace AplicacionUdemyService.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("insertarUserAdminEmpresa")]
+        public IHttpActionResult insertarUserAdminEmpresa(RegistroEmpresaDTOEntity paramss)
+        {
+            try
+            {
+                var _result = empresaDTO.insertarUserAdminEmpresa(paramss);
+                return Ok(_result);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
     }
 }

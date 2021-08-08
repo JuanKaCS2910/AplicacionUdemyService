@@ -90,5 +90,47 @@ namespace AplicacionUdemyService.Datos
 
 		}
 
+
+		public ResponseRegistroEmpresa insertarUserAdminEmpresa(RegistroEmpresaDTOEntity paramss)
+		{
+			try
+			{
+				string cs = ConfigurationManager.ConnectionStrings["ConexionAcceso"].ConnectionString;
+				var lista = new ResponseRegistroEmpresa();
+
+				using (SqlConnection conn = new SqlConnection(cs))
+				{
+					conn.Open();
+					SqlCommand cmd = new SqlCommand("Usp_insertarUserAdminEmpresa", conn);
+					cmd.CommandType = CommandType.StoredProcedure;
+					cmd.Parameters.Add(new SqlParameter("@ruc", paramss.paramsEmpresa.ruc));
+					cmd.Parameters.Add(new SqlParameter("@email", paramss.paramsEmpresa.email));
+					cmd.Parameters.Add(new SqlParameter("@username", paramss.paramsEmpresa.username));
+					cmd.Parameters.Add(new SqlParameter("@usuario", paramss.paramsEmpresa.usuario));
+					cmd.Parameters.Add(new SqlParameter("@contrasena", paramss.paramsEmpresa.contrasena));
+					cmd.Parameters.Add(new SqlParameter("@cargo", paramss.cargo));
+					cmd.Parameters.Add(new SqlParameter("@cantUser", paramss.cantUser));
+					cmd.Parameters.Add(new SqlParameter("@proyecto", paramss.proyecto));
+
+					using (SqlDataReader dr = cmd.ExecuteReader())
+					{
+						while (dr.Read())
+						{
+							lista.response = Convert.ToString(dr["response"]).ToString();
+						}
+					}
+				}
+				return lista;
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+
+
+		}
+
+
 	}
 }
