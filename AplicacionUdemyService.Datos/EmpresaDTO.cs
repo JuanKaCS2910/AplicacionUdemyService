@@ -131,6 +131,39 @@ namespace AplicacionUdemyService.Datos
 
 		}
 
+		public ResponseRegistroEmpresa activarCuenta(string ruc)
+		{
+			try
+			{
+				string cs = ConfigurationManager.ConnectionStrings["ConexionAcceso"].ConnectionString;
+				var lista = new ResponseRegistroEmpresa();
+
+				using (SqlConnection conn = new SqlConnection(cs))
+				{
+					conn.Open();
+					SqlCommand cmd = new SqlCommand("Usp_activarCuenta", conn);
+					cmd.CommandType = CommandType.StoredProcedure;
+					cmd.Parameters.Add(new SqlParameter("@ruc", ruc));
+
+					using (SqlDataReader dr = cmd.ExecuteReader())
+					{
+						while (dr.Read())
+						{
+							lista.response = Convert.ToString(dr["response"]).ToString();
+						}
+					}
+				}
+				return lista;
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+
+
+		}
+
 
 	}
 }

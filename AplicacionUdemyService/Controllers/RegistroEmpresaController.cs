@@ -139,5 +139,21 @@ namespace AplicacionUdemyService.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("activarCuenta")]
+        public IHttpActionResult activarCuenta(string ruc)
+        {
+            try
+            {
+                var _result = empresaDTO.activarCuenta(ruc);
+                return Ok(_result);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
     }
 }
